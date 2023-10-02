@@ -1,13 +1,19 @@
 package com.mycompany.app;
 
-/**
- * Hello world!
- *
- */
+import com.mycompany.app.Structs.ListOfLists;
+
+
 public class Main 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        ListOfLists<Integer> listOfLists = new ListOfLists<>(2);
+
+        listOfLists.push(1);
+        listOfLists.push(2);
+        listOfLists.push(3);
+        listOfLists.push(4);
+
+        listOfLists.print();
     }
 }
