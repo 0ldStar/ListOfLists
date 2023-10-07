@@ -24,6 +24,24 @@ public class CustomList<T> {
         len++;
     }
 
+    public void pop(int ind) {
+        if (head != null) {
+            Node<T> tmp = head;
+            Node<T> prev = head;
+            for (int i = 0; tmp != null; i++) {
+                if (i == ind) {
+                    if (tmp == head)
+                        head = tmp.next;
+                    else
+                        prev.next = tmp.next;
+                    return;
+                }
+                prev = tmp;
+                tmp = tmp.next;
+            }
+        }
+    }
+
     public void print() {
         if (head != null) {
             Node<T> tmp = head;
@@ -38,6 +56,10 @@ public class CustomList<T> {
 
     public int getLength() {
         return len;
+    }
+
+    public boolean isEmpty() {
+        return head == null;
     }
 
     private int len;

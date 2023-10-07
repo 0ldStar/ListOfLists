@@ -30,6 +30,28 @@ public class ListOfLists<T> {
         }
     }
 
+    public void pop(int ind) {
+        if (head != null) {
+            Node<CustomList<T>> tmp = head;
+            Node<CustomList<T>> prev = head;
+            while (tmp != null) {
+                if (ind < tmp.value.getLength()) {
+                    tmp.value.pop(ind);
+                    if (tmp.value.isEmpty()) {
+                        if (tmp == head)
+                            head = tmp.next;
+                        else
+                            prev.next = tmp.next;
+                    }
+                    return;
+                }
+                ind -= tmp.value.getLength();
+                prev = tmp;
+                tmp = tmp.next;
+            }
+        }
+    }
+
     public void print() {
         if (head != null) {
             System.out.println("List of lists");
@@ -39,6 +61,8 @@ public class ListOfLists<T> {
                 tmp.value.print();
                 tmp = tmp.next;
             }
+        } else {
+            System.out.println("List if lists is empty");
         }
     }
 

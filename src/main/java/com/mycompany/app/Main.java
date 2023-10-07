@@ -13,7 +13,14 @@ public class Main
         listOfLists.push(2);
         listOfLists.push(3);
         listOfLists.push(4);
-
+        listOfLists.print();
+        listOfLists.pop(3);
+        listOfLists.print();
+        listOfLists.pop(2);
+        listOfLists.print();
+        listOfLists.pop(1);
+        listOfLists.print();
+        listOfLists.pop(0);
         listOfLists.print();
     }
 }
