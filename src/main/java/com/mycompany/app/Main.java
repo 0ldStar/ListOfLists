@@ -9,18 +9,29 @@ public class Main
     {
         ListOfLists<Integer> listOfLists = new ListOfLists<>(2);
 
-        listOfLists.push(1);
-        listOfLists.push(2);
-        listOfLists.push(3);
-        listOfLists.push(4);
+        // listOfLists.push(1);
+        // listOfLists.push(2);
+        // listOfLists.push(3);
+        // listOfLists.push(4);
+        // listOfLists.print();
+        // listOfLists.pop(3);
+        // listOfLists.print();
+        // listOfLists.pop(2);
+        // listOfLists.print();
+        // listOfLists.pop(1);
+        // listOfLists.print();
+        // listOfLists.pop(0);
+        // listOfLists.print();
+        listOfLists.insert(0, 1);
         listOfLists.print();
-        listOfLists.pop(3);
+        listOfLists.insert(0, 2);
         listOfLists.print();
-        listOfLists.pop(2);
+        listOfLists.insert(0, 3);
         listOfLists.print();
-        listOfLists.pop(1);
+        listOfLists.insert(2, 4);
         listOfLists.print();
-        listOfLists.pop(0);
+        listOfLists.insert(2, 4);
         listOfLists.print();
+        
     }
 }

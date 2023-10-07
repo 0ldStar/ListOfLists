@@ -24,7 +24,8 @@ public class CustomList<T> {
         len++;
     }
 
-    public void pop(int ind) {
+    public T pop(int ind) {
+        T res = null;
         if (head != null) {
             Node<T> tmp = head;
             Node<T> prev = head;
@@ -34,10 +35,39 @@ public class CustomList<T> {
                         head = tmp.next;
                     else
                         prev.next = tmp.next;
-                    return;
+                    len--;
+                    return tmp.value;
                 }
                 prev = tmp;
                 tmp = tmp.next;
+            }
+        }
+        return res;
+    }
+
+    public void insert(int ind, T value) {
+        if (ind <= len) {
+            if (ind == 0) {
+                Node<T> tmp = new Node<T>(value);
+                tmp.next = head;
+                head = tmp;
+                len++;
+            } else {
+                Node<T> tmp = head;
+                Node<T> prev = head;
+                int i = 0;
+                while (tmp != null) {
+                    if (i == ind) {
+                        Node<T> newNode = new Node<T>(value);
+                        prev.next = newNode;
+                        newNode.next = tmp;
+                        len++;
+                        return;
+                    }
+                    prev = tmp;
+                    tmp = tmp.next;
+                    i++;
+                }
             }
         }
     }
