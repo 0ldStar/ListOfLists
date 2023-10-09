@@ -1,6 +1,8 @@
 package com.mycompany.app.Structs;
 
-public class CustomList<T> {
+import java.io.Serializable;
+
+public class CustomList<T> implements Serializable {
     public CustomList() {
         head = null;
     }
@@ -45,7 +47,7 @@ public class CustomList<T> {
         return res;
     }
 
-    public void insert(int ind, T value) {
+    public void insert(int ind, T value) /* throws Exception */ {
         if (ind <= len) {
             if (ind == 0) {
                 Node<T> tmp = new Node<T>(value);
@@ -70,6 +72,7 @@ public class CustomList<T> {
                 }
             }
         }
+        // throw new Exception("ABOBA");
     }
 
     public void print() {

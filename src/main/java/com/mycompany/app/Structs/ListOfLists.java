@@ -1,6 +1,8 @@
 package com.mycompany.app.Structs;
 
-public class ListOfLists<T> {
+import java.io.Serializable;
+
+public class ListOfLists<T> implements Serializable {
     public ListOfLists() {
         head = null;
     }
