@@ -48,6 +48,11 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        listOfLists.forEach(new ForEachCallbackInterface<Integer>() {
+            @Override
+            public void toDo(Integer v) {
+                System.out.println(v);
+            }
+        });
     }
 }

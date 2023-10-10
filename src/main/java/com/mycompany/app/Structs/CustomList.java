@@ -2,6 +2,8 @@ package com.mycompany.app.Structs;
 
 import java.io.Serializable;
 
+import com.mycompany.app.ForEachCallbackInterface;
+
 public class CustomList<T> implements Serializable {
     public CustomList() {
         head = null;
@@ -73,6 +75,15 @@ public class CustomList<T> implements Serializable {
             }
         }
         // throw new Exception("ABOBA");
+    }
+
+    public void forEach(ForEachCallbackInterface<T> callback) {
+        Node<T> tmp = head;
+
+        while (tmp != null) {
+            callback.toDo(tmp.value);
+            tmp = tmp.next;
+        }
     }
 
     public void print() {

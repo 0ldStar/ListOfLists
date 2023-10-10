@@ -2,6 +2,8 @@ package com.mycompany.app.Structs;
 
 import java.io.Serializable;
 
+import com.mycompany.app.ForEachCallbackInterface;
+
 public class ListOfLists<T> implements Serializable {
     public ListOfLists() {
         head = null;
@@ -93,6 +95,16 @@ public class ListOfLists<T> implements Serializable {
                 System.out.println(value);
             }
             node = node.next;
+        }
+    }
+
+    public void forEach(ForEachCallbackInterface<T> callback) {
+        Node<CustomList<T>> tmp = head;
+
+        while (tmp != null) {
+            CustomList<T> customList = tmp.value;
+            customList.forEach(callback);
+            tmp = tmp.next;
         }
     }
 
