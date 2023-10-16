@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 
 import com.mycompany.app.Structs.ListOfLists;
 
-public class Serializer<T> {
+public class Serializer<T extends Comparable<T>> {
     Serializer() {
         
     }

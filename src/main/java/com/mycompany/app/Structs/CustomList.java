@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.mycompany.app.ForEachCallbackInterface;
 
-public class CustomList<T> implements Serializable {
+public class CustomList<T extends Comparable<T>> implements Serializable {
     public CustomList() {
         head = null;
     }
@@ -83,6 +83,39 @@ public class CustomList<T> implements Serializable {
         while (tmp != null) {
             callback.toDo(tmp.value);
             tmp = tmp.next;
+        }
+    }
+
+    public T getElement(int index) {
+        if (index >= 0 && index < len) {
+            Node<T> tmp = head;
+            int i = 0;
+            while (tmp != null) {
+                if (i == index)
+                    return tmp.value;
+                tmp = tmp.next;
+                i++;
+            }
+        }
+        throw new IndexOutOfBoundsException("Index out of bounds: " + index);
+    }
+
+    public void setElement(int ind, T element) {
+        if (head != null) {
+            if (ind < len) {
+                Node<T> tmp = head;
+                int i = 0;
+                while (tmp != null) {
+                    if (i == ind) {
+                        tmp.value = element;
+                        return;
+                    }
+                    i++;
+                    tmp = tmp.next;
+                }
+            } else {
+                throw new IndexOutOfBoundsException("Index out of bounds");
+            }
         }
     }
 
