@@ -37,7 +37,7 @@ public class ListOfLists<T extends Comparable<T>> implements Serializable {
         }
     }
 
-    public T pop(int ind) {
+    public T pop(int ind) throws IndexOutOfBoundsException {
         T res = null;
         if (head != null) {
             Node<CustomList<T>> tmp = head;
@@ -58,8 +58,10 @@ public class ListOfLists<T extends Comparable<T>> implements Serializable {
                 prev = tmp;
                 tmp = tmp.next;
             }
+            throw new IndexOutOfBoundsException("Index out of bounds: " + ind);
+        } else {
+            throw new NullPointerException();
         }
-        return res;
     }
 
     public void insert(int ind, T value) {
@@ -87,6 +89,20 @@ public class ListOfLists<T extends Comparable<T>> implements Serializable {
         }
     }
 
+    public void balancing() {
+        Node<CustomList<T>> tmp = head;
+        Node<CustomList<T>> prev = head;
+        while (tmp != null) {
+            while ((tmp.value.getLength() < maxLen) && (tmp.next != null) && (tmp.next.value != null)) {
+                tmp.value.push(tmp.next.value.pop(0));
+            }
+            if ((tmp.next == null) && (tmp.value.getLength() == 0))
+                prev.next = null;
+            prev = tmp;
+            tmp = tmp.next;
+        }
+    }
+
     private void balancing(Node<CustomList<T>> node) {
         while (node != null) {
             if (node.value.getLength() > maxLen) {
@@ -97,8 +113,8 @@ public class ListOfLists<T extends Comparable<T>> implements Serializable {
                     node.next = new Node<CustomList<T>>();
                     node.next.value = new CustomList<T>(value);
                 }
-                System.out.print("Value: ");
-                System.out.println(value);
+                // System.out.print("Value: ");
+                // System.out.println(value);
             }
             node = node.next;
         }
@@ -126,6 +142,7 @@ public class ListOfLists<T extends Comparable<T>> implements Serializable {
 
             heapify(i, 0);
         }
+        balancing();
     }
 
     private void heapify(int n, int i) {
@@ -165,7 +182,7 @@ public class ListOfLists<T extends Comparable<T>> implements Serializable {
         }
     }
 
-    public T getElement(int ind) {
+    public T getElement(int ind) throws IndexOutOfBoundsException, NullPointerException {
         T res;
         if (head != null) {
             Node<CustomList<T>> tmp = head;
@@ -178,8 +195,9 @@ public class ListOfLists<T extends Comparable<T>> implements Serializable {
                 tmp = tmp.next;
             }
             throw new IndexOutOfBoundsException("Index out of bounds: " + ind);
+        } else {
+            throw new NullPointerException();
         }
-        throw new NullPointerException();
     }
 
     public void print() {

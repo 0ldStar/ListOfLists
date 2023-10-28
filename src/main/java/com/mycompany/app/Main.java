@@ -22,13 +22,14 @@ public class Main {
             System.out.println("\nList of lists Menu:");
             System.out.println("1. Get content");
             System.out.println("2. Save to file");
-            System.out.println("3. Inmort from file");
+            System.out.println("3. Import from file");
             System.out.println("4. Push");
             System.out.println("5. Pop");
             System.out.println("6. Insert");
             System.out.println("7. Sort");
             System.out.println("8. Get by id");
-            System.out.println("9. Exit");
+            System.out.println("9. Balancing");
+            System.out.println("10. Exit");
             String input = System.console().readLine();
             switch (input) {
                 case "1":
@@ -73,12 +74,13 @@ public class Main {
                     try {
                         Integer number = Integer.valueOf(value);
                         Integer result = listOfLists.pop(number);
-                        if (result != null)
-                            System.out.println("Pop " + result.toString());
-                        else
-                            System.out.println("Index is out of bounds");
+                        System.out.println("Pop " + result.toString());
                     } catch (NumberFormatException e) {
                         System.out.println("Invalid integer input");
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Index out of bounds: " + value);
+                    } catch (NullPointerException e) {
+                        System.out.println("List is empty");
                     }
                     break;
 
@@ -102,19 +104,26 @@ public class Main {
                     break;
 
                 case "8":
-                    System.out.println("Input value for push:");
+                    System.out.println("Input index for get:");
                     value = System.console().readLine();
                     try {
                         Integer number = Integer.valueOf(value);
-                        listOfLists.push(number);
+                        System.out.println("Value: " + listOfLists.getElement(number));
                     } catch (NumberFormatException e) {
                         System.out.println("Invalid integer input");
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Index out of bounds: " + value);
+                    } catch (NullPointerException e) {
+                        System.out.println("List is empty");
                     }
                     break;
 
                 case "9":
+                    listOfLists.balancing();
+                    System.out.println("Balanced");
+                    break;
+                case "10":
                     return;
-
                 default:
                     System.out.println("Invalid input");
                     break;

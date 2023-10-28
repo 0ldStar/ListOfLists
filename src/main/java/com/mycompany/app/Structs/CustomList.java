@@ -49,7 +49,7 @@ public class CustomList<T extends Comparable<T>> implements Serializable {
         return res;
     }
 
-    public void insert(int ind, T value) /* throws Exception */ {
+    public void insert(int ind, T value) {
         if (ind <= len) {
             if (ind == 0) {
                 Node<T> tmp = new Node<T>(value);
@@ -74,7 +74,6 @@ public class CustomList<T extends Comparable<T>> implements Serializable {
                 }
             }
         }
-        // throw new Exception("ABOBA");
     }
 
     public void forEach(ForEachCallbackInterface<T> callback) {
@@ -124,11 +123,11 @@ public class CustomList<T extends Comparable<T>> implements Serializable {
             Node<T> tmp = head;
             while (tmp != null) {
                 System.out.print(tmp.value);
-                System.out.print(" ");
+                System.out.print(" -> ");
                 tmp = tmp.next;
             }
         }
-        System.out.println("Len = " + Integer.toString(len));
+        System.out.println(" |Len = " + Integer.toString(len));
     }
 
     public int getLength() {
