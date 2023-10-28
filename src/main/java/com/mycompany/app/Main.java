@@ -9,6 +9,8 @@ import com.mycompany.app.Structs.ListOfLists;
 public class Main {
     public static void main(String[] args) {
         ListOfLists<Integer> listOfLists = new ListOfLists<>(2);
+        String value;
+        String fileName;
 
         listOfLists.push(4);
         listOfLists.push(2);
@@ -16,47 +18,107 @@ public class Main {
         listOfLists.push(-3);
         listOfLists.push(1);
         listOfLists.print();
-        // listOfLists.pop(3);
-        // listOfLists.print();
-        // listOfLists.pop(2);
-        // listOfLists.print();
-        // listOfLists.pop(1);
-        // listOfLists.print();
-        // listOfLists.pop(0);
-        // listOfLists.print();
-        // listOfLists.insert(0, 1);
-        // listOfLists.print();
-        // listOfLists.insert(0, 2);
-        // listOfLists.print();
-        // listOfLists.insert(0, 3);÷
-        // listOfLists.print();
-        // listOfLists.insert(2, 4);
-        // listOfLists.print();
-        // listOfLists.insert(2, 4);
-        // listOfLists.print();
-        // Serializer<Integer> serializer = new Serializer<>();
-        // try {
-        //     serializer.write(listOfLists);
+        while (true) {
+            System.out.println("\nList of lists Menu:");
+            System.out.println("1. Get content");
+            System.out.println("2. Save to file");
+            System.out.println("3. Inmort from file");
+            System.out.println("4. Push");
+            System.out.println("5. Pop");
+            System.out.println("6. Insert");
+            System.out.println("7. Sort");
+            System.out.println("8. Get by id");
+            System.out.println("9. Exit");
+            String input = System.console().readLine();
+            switch (input) {
+                case "1":
+                    listOfLists.print();
+                    break;
+                case "2":
+                    System.out.println("Input file name:");
+                    fileName = System.console().readLine();
+                    try {
+                        Serializer.write(listOfLists, fileName);
+                        System.out.println("Stored");
+                    } catch (IOException e) {
+                        System.out.println("Can't open file");
+                    }
+                    break;
 
-        // } catch (Exception e) {
-        //     e.printStackTrace();
-        //     // System.out.println();
-        // }
-        // try {
-        //     ListOfLists listOfLists2 = serializer.read();
+                case "3":
+                    System.out.println("Input file name:");
+                    fileName = System.console().readLine();
+                    try {
+                        listOfLists = Serializer.read(fileName);
+                        System.out.println("Read");
+                    } catch (IOException | ClassNotFoundException e) {
+                        System.out.println("Can't open file or can't cast data to ListOfLists");
+                    }
+                    break;
 
-        //     listOfLists2.print();
-        // } catch (Exception e) {
-        //     e.printStackTrace();
-        // }
-        // listOfLists.test();
-        listOfLists.sort();
-        listOfLists.print();
-        // listOfLists.forEach(new ForEachCallbackInterface<Integer>() {
-        //     @Override
-        //     public void toDo(Integer v) {
-        //         System.out.println(v);
-        //     }
-        // });
+                case "4":
+                    System.out.println("Input value for push:");
+                    value = System.console().readLine();
+                    try {
+                        Integer number = Integer.valueOf(value);
+                        listOfLists.push(number);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid integer input");
+                    }
+                    break;
+
+                case "5":
+                    System.out.println("Input index for pop:");
+                    value = System.console().readLine();
+                    try {
+                        Integer number = Integer.valueOf(value);
+                        Integer result = listOfLists.pop(number);
+                        if (result != null)
+                            System.out.println("Pop " + result.toString());
+                        else
+                            System.out.println("Index is out of bounds");
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid integer input");
+                    }
+                    break;
+
+                case "6":
+                    System.out.println("Input index for insert:");
+                    String indexString = System.console().readLine();
+                    System.out.println("Input value for insert:");
+                    value = System.console().readLine();
+                    try {
+                        Integer index = Integer.valueOf(indexString);
+                        Integer number = Integer.valueOf(value);
+                        listOfLists.insert(index, number);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid integer input");
+                    }
+                    break;
+
+                case "7":
+                    listOfLists.sort();
+                    System.out.println("Sorted");
+                    break;
+
+                case "8":
+                    System.out.println("Input value for push:");
+                    value = System.console().readLine();
+                    try {
+                        Integer number = Integer.valueOf(value);
+                        listOfLists.push(number);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid integer input");
+                    }
+                    break;
+
+                case "9":
+                    return;
+
+                default:
+                    System.out.println("Invalid input");
+                    break;
+            }
+        }
     }
 }

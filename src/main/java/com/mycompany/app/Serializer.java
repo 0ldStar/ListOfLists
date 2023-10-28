@@ -8,29 +8,21 @@ import java.io.ObjectOutputStream;
 
 import com.mycompany.app.Structs.ListOfLists;
 
-public class Serializer<T extends Comparable<T>> {
-    Serializer() {
-        
-    }
+public abstract class Serializer {
 
-    public void write(ListOfLists<T> listOfLists) throws IOException {
+    public static <T extends Comparable<T>> void write(ListOfLists<T> listOfLists, String fileName) throws IOException {
         if (listOfLists != null) {
-            FileOutputStream fos = new FileOutputStream("temp.out");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(listOfLists);
-            oos.flush();
-            oos.close();
-            fos.close();
+            try (FileOutputStream fos = new FileOutputStream(fileName);
+                 ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+                oos.writeObject(listOfLists);
+            }
         }
     }
 
-    public ListOfLists<T> read() throws IOException, ClassNotFoundException {
-        FileInputStream fis = new FileInputStream("temp.out");
-        ObjectInputStream oin = new ObjectInputStream(fis);
-        ListOfLists<T> listOfLists = (ListOfLists<T>) oin.readObject();
-        oin.close();
-        fis.close();
-        return listOfLists;
+    public static <T extends Comparable<T>> ListOfLists<T> read(String fileName) throws IOException, ClassNotFoundException {
+        try (FileInputStream fis = new FileInputStream(fileName);
+             ObjectInputStream oin = new ObjectInputStream(fis)) {
+            return (ListOfLists<T>) oin.readObject();
+        }
     }
-
 }
